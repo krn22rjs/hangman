@@ -28,8 +28,8 @@ function startGame() {
     blankAndSuccesses = [];
 
     // populate blanks and success with blanks
-    for(var i = 0; i<numBlanks; i++){
-      blankAndSuccesses.push("_")
+    for (var i = 0; i < numBlanks; i++) {
+        blankAndSuccesses.push("_")
     }
 
     // changing html to reflect each round 
@@ -43,7 +43,66 @@ function startGame() {
     console.log(numBlanks);
     console.log(blankAndSuccesses);
 }
+// 
+function checkLetters(letter) {
+    // checks if the letter exist in the word
+    var isLetterInWord = false;
+    alert(letter);
+    //for loop
+    for (var i = 0; i < numBlanks; i++) {
+        if (selectcharacter[i] == letter) {
+            isLetterInWord = true;
+        }
+    }
 
+    //check where is the word letter exist
+    if (isLetterInWord) {
+        for (var i = 0; i < numBlanks; i++) {
+            if (selectCharacter[i] == letter) {
+                blankAndSuccesses[i] = letter;
+
+            }
+        }
+
+    }
+    // letter wasn't found
+    else{
+      wrongLetters.push(letter);
+      guessesLeft--
+    }
+// testing
+console.log(blankAndSuccesses);
+}
+
+function roundComplete(){
+
+//update HTML to reflect the user's guesses
+document.getElementById("numGuesses").innerHTML = guessesLeft
+
+  console.log("Win Count: " + winCount + " | Lost Count: " + lossCount + " | Guesses Left " + numGuesses);
+
+// check if user won
+if(lettersinName.toString() == blankAndSuccesses.toString()){
+  winCount++;
+  alert("You won!");
+
+  // update the win counter
+  document.getElementById("winCounter").innerHTML = winCount;
+  startGame();
+}
+
+// check if user loses
+else if (guessesLeft == 0 ){
+  lossCount++;
+  alert("you lost !");
+
+
+  //update html
+  document.getElementById("lossCounter").innerHTML = lossCount;
+
+  startGame();
+}
+}
 //main process 
 //---------------------
 
@@ -53,9 +112,11 @@ startGame();
 
 
 // keyclicks
-document.onekeyup = function(event){
-  var letterGuessed = String.fromCharCode(event.keycode).toLowerCase();
+document.onekeyup = function(event) {
+    var letterGuessed = String.fromCharCode(event.keycode).toLowerCase();
+    checkLetters(letterGuessed);
+    roundComplete();
 
-  // testing
-  console.log(letterGuessed);
+    // testing
+    console.log(letterGuessed);
 }
