@@ -47,10 +47,10 @@ function startGame() {
 function checkLetters(letter) {
     // checks if the letter exist in the word
     var isLetterInWord = false;
-    alert(letter);
+    //alert(letter);
     //for loop
     for (var i = 0; i < numBlanks; i++) {
-        if (selectcharacter[i] == letter) {
+        if (selectCharacter[i] == letter) {
             isLetterInWord = true;
         }
     }
@@ -76,8 +76,10 @@ console.log(blankAndSuccesses);
 
 function roundComplete(){
 
-//update HTML to reflect the user's guesses
-document.getElementById("numGuesses").innerHTML = guessesLeft
+//update HTML to reflect the user's guesses;
+document.getElementById("numGuesses").innerHTML = guessesLeft;
+document.getElementById("nameToGuess").innerHTML = blankAndSuccesses.join(" ");
+document.getElementById("wrongGuesses").innerHTML = wrongLetters.join(" ");
 
   console.log("Win Count: " + winCount + " | Lost Count: " + lossCount + " | Guesses Left " + numGuesses);
 
